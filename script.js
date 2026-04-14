@@ -6,7 +6,16 @@ const li = setInterval(() => {
   if (pct >= 100) { pct = 100; clearInterval(li); }
   loaderPerc.textContent = Math.round(pct) + '%';
 }, 110);
-window.addEventListener('load', () => setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1500));
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+
+    if (heroImg) {
+      heroImg.style.animation = 'slideUp 1s cubic-bezier(0.34,1.56,0.64,1) forwards';
+    }
+
+  }, 1500);
+});
 
 /* CURSOR */
 const cg = document.getElementById('cursor-glow');
@@ -201,8 +210,7 @@ if (heroImg && heroWrapper) {
   // Set animation complete after delay matching CSS animation
   setTimeout(() => {
     animationComplete = true;
-    heroImg.style.transition = 'transform 0.1s ease-out';
-  }, 1100); // 1s animation + 0.1s delay
+  }, 2000); // MUST be longer than animation + loader
   
   // Mouse tracking - interactive 3D rotation on hover
   document.addEventListener('mousemove', (e) => {
@@ -259,4 +267,6 @@ if (heroImg && heroWrapper) {
       heroImg.style.transform = `translateY(${currentScrollY}px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) scale(1.05)`;
     }
   });
+
+  
 }
